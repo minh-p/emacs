@@ -132,7 +132,8 @@
 ;;   :config
 ;;   (evil-collection-init))
 
-;; Vertico and Orderless Search (Fuzzy Finder)
+;; MiniBuffer
+;;; Vertico (Vertical Display) and Orderless Search (Fuzzy Finder)
 (use-package vertico
   :ensure t
   :init
@@ -144,3 +145,25 @@
   (completion-styles '(orderless basic))
   ;; Makes orderless treat component queries as fuzzy flex matches
   (orderless-matching-styles '(orderless-flex))) 
+
+;;; Marginalia (Annotations)
+(use-package marginalia
+  :ensure t
+  :bind (:map minibuffer-local-map
+              ("M-A" . marginalia-cycle))
+  :init
+  (marginalia-mode)
+  )
+
+;;; Nerd Fonts Icons
+(use-package nerd-icons-completion
+  :ensure t
+  :after marginalia
+  :config
+  (nerd-icons-completion-mode)
+  (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup)
+  )
+
+(use-package nerd-icons-dired
+  :hook (dired-mode . nerd-icons-dired-mode)
+  :ensure t)
