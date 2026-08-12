@@ -1,0 +1,14 @@
+auto-save-list/
+custom.el
+*~
+eln-cache/
+elpa/
+org-roam.db
+recentf
+bookmarks
+places
+tramp
+url/
+transient/
+projects
+projectile-bookmarks.eld
