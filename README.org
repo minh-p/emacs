@@ -1,0 +1,12 @@
+* Purpose
+I finally have some time to really learn emacs. Previously, I used doom emacs and evil-mode without appreciating the design of emacs and came by default out of the box.
+Some issues also arised from the lack of understanding: indentations being funky and annoying, massive lists of packages I never use or understand,
+bad workflow like being too terminal dependent (instead of using native features, ...)
+- I needed more control and I wanted a cleaner and simpler configuration.
+- I also have time to simply learn more: Reading the GNU Emacs and GNU Emacs Lisp manual and spending time crafting my own configuration makes Emacs truly mine.
+- Minimal tooling is the best way to learn programming.
+- Expose myself to emacs default keybindings and eventually tailor my own.
+* Tooling
+1. [X] Theme
+2. [X] Fonts
+3. [X] Org-mode + Org-roam
