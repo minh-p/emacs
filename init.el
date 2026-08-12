@@ -33,6 +33,8 @@
 ;; Buffer Centering - Olivetti
 (use-package olivetti
   :hook (org-mode dired-mode)
+  :config
+  (olivetti-set-width 120)
   :ensure t)
 
 ;; Theme
