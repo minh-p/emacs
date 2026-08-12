@@ -1,5 +1,5 @@
 * Purpose
-I finally have some time to really learn emacs. Previously, I used doom emacs without appreciating the design of emacs and came by default out of the box.
+I finally have some time to really learn emacs. Previously, I used doom emacs and I felt like I didn't use 1/10 of its functionalities.
 Some issues also arised from the lack of understanding: indentations being funky and annoying, massive lists of packages I never use or understand,
 bad workflow like being too terminal dependent (instead of using native features, ...)
 - I needed more control and I wanted a cleaner and simpler configuration.
