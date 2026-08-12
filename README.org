@@ -16,6 +16,6 @@ bad workflow like being too terminal dependent (instead of using native features
    - [X] CMake
    - [X] QML
    - [X] Bash
-5. [ ] Evil-Mode. Learning emacs bindings deeply besides the basics
-   of moving cursor around, deleting text, killing and yanking is a waste
-   of time because I'm already familiar with vim-bindings.
+5. [X] Better Buffer - Vertico, Orderless, Marginalia
+6. [X] Better Searching - Consult
+7. [X] Actions Menu - Embark
