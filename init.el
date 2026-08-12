@@ -26,12 +26,22 @@
 (setq display-line-numbers-type 'relative)
 (global-display-line-numbers-mode)
 
+;; Disable Wrapping
+(global-visual-line-mode -1)
+(set-default 'truncate-lines t)
+
+;; Buffer Centering - Olivetti
+(use-package olivetti
+  :hook (org-mode dired-mode)
+  :ensure t)
+
 ;; Theme
 (use-package gruvbox-theme
   :ensure t
   :config
   (load-theme 'gruvbox t)
-  )
+  (set-face-attribute 'line-number nil
+                      :background 'unspecified))
 
 ;; Direnv
 (use-package direnv
@@ -54,7 +64,7 @@
 	 ("C-c n f" . org-roam-node-find)
 	 ("C-c n i" . org-roam-node-insert)
 	 ("C-c n c" . org-roam-capture)
-	 ("C-c n r d" . org-roam-dailies-find-date))
+	 ("C-c n r d" . org-roam-dailies-goto-date))
   :config
   (org-roam-db-autosync-mode)
   )
@@ -77,7 +87,6 @@
   )
 
 ;; Magit
-
 (use-package transient :ensure t)
 (use-package magit
   :ensure t
@@ -156,7 +165,7 @@
   :config
   (add-hook 'eglot-managed-mode-hook
             (lambda ()
-              (add-hook 'before-save-hook
+	      (add-hook 'before-save-hook
                         #'eglot-format-buffer nil t))))
 
 ;; ;; Evil Mode and Evil Collections
@@ -197,7 +206,7 @@
 (use-package marginalia
   :ensure t
   :bind (:map minibuffer-local-map
-              ("M-A" . marginalia-cycle))
+	      ("M-A" . marginalia-cycle))
   :init
   (marginalia-mode)
   )
@@ -304,7 +313,7 @@
   :config
   ;;; Hide modeline of embark buffers
   (add-to-list 'display-buffer-alist
-               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+	       '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
                  nil
                  (window-parameters (mode-line-format . none))))
   )
