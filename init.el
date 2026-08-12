@@ -237,12 +237,17 @@
   (setq consult-narrow-key "<")
   )
 
+;; Consult-Eglot - Search LSP Workspace Symbols
+(use-package consult-eglot
+  :ensure t
+  :bind (("M-s p" . consult-eglot-symbols)))
+
 ;; Embark - Extra actions instead of just opening
 (use-package embark
   :ensure t
   :bind (
 	 ("C-." . embark-act)
-	 ("C-;" . embark-dwim)
+	 ("C-S-d" . embark-dwim)
 	 ("C-h B" . embark-bindings)
 	 )
   :init
