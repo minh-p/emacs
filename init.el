@@ -71,7 +71,11 @@
 ;; Magit
 
 (use-package transient :ensure t)
-(use-package magit :ensure t :after transient)
+(use-package magit
+  :ensure t
+  :config
+  (keymap-global-set "C-c g g" 'magit-status)
+  :after transient)
 
 ;; Treesit Langs Better Syntax Highlighting
 (use-package treesit
@@ -108,25 +112,25 @@
 (use-package vterm
   :ensure t)
 
-;; Evil Mode and Evil Collections
-(use-package evil
-  :init
-  (setq evil-want-integration t
-        evil-want-keybinding nil
-        evil-want-C-u-scroll t
-        evil-want-Y-yank-to-eol t
-        evil-respect-visual-line-mode t
-        evil-undo-system 'undo-redo)
-  :config
-  (evil-mode 1))
+;; ;; Evil Mode and Evil Collections
+;; (use-package evil
+;;   :init
+;;   (setq evil-want-integration t
+;;         evil-want-keybinding nil
+;;         evil-want-C-u-scroll t
+;;         evil-want-Y-yank-to-eol t
+;;         evil-respect-visual-line-mode t
+;;         evil-undo-system 'undo-redo)
+;;   :config
+;;   (evil-mode 1))
 
-(use-package evil-collection
-  :after evil
-  :ensure t
-  :init
-  (setq evil-want-integration t evil-want-keybinding nil)
-  :config
-  (evil-collection-init))
+;; (use-package evil-collection
+;;   :after evil
+;;   :ensure t
+;;   :init
+;;   (setq evil-want-integration t evil-want-keybinding nil)
+;;   :config
+;;   (evil-collection-init))
 
 ;; Vertico and Orderless Search (Fuzzy Finder)
 (use-package vertico
