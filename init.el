@@ -320,3 +320,34 @@
 
 (use-package embark-consult
   :ensure t)
+
+;; Completion - Corfu + Cape
+;;; Tab for Complete at Point
+(setq tab-always-indent 'complete
+      text-mode-is-spell-word-completion nil)
+(use-package corfu
+  :ensure t
+  :init
+  (global-corfu-mode)
+  (corfu-history-mode)
+  (corfu-popupinfo-mode)
+  :custom
+  (corfu-cycle t)
+  (corfu-quit-at-boundary nil)
+  (corfu-quit-no-match nil)
+  (corfu-preview-current nil)
+  (corfu-preselect 'prompt)
+  (corfu-on-exact-match 'insert)
+  )
+;;; Cape - Better Supported Completion Backend
+(use-package cape
+  :ensure t
+  :bind ("C-c p" . cape-prefix-map)
+  :init
+  (add-hook 'completion-at-point-functions #'cape-dabbrev)
+  (add-hook 'completion-at-point-functions #'cape-file)
+  (add-hook 'completion-at-point-functions #'cape-elisp-block)
+  (add-hook 'completion-at-point-functions #'cape-dict)
+  (add-hook 'completion-at-point-functions #'cape-keyword)
+  (add-hook 'completion-at-point-functions #'cape-emoji)
+  )
