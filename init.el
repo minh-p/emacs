@@ -21,6 +21,11 @@
 ;; Fonts
 (set-face-attribute 'default nil :family "Iosevka" :height 210)
 
+;; Numbers Info
+(column-number-mode 1)
+(setq display-line-numbers-type 'relative)
+(global-display-line-numbers-mode)
+
 ;; Theme
 (use-package gruvbox-theme
   :ensure t
