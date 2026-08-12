@@ -1,5 +1,5 @@
 * Purpose
-I finally have some time to really learn emacs. Previously, I used doom emacs and evil-mode without appreciating the design of emacs and came by default out of the box.
+I finally have some time to really learn emacs. Previously, I used doom emacs without appreciating the design of emacs and came by default out of the box.
 Some issues also arised from the lack of understanding: indentations being funky and annoying, massive lists of packages I never use or understand,
 bad workflow like being too terminal dependent (instead of using native features, ...)
 - I needed more control and I wanted a cleaner and simpler configuration.
@@ -16,3 +16,6 @@ bad workflow like being too terminal dependent (instead of using native features
    - [X] CMake
    - [X] QML
    - [X] Bash
+5. [ ] Evil-Mode. Learning emacs bindings deeply besides the basics
+   of moving cursor around, deleting text, killing and yanking is a waste
+   of time because I'm already familiar with vim-bindings.

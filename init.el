@@ -34,8 +34,7 @@
 ;; Org configuration
 (use-package org
   :ensure nil
-  :defer t
-  :hook (org-mode . org-indent-mode))
+  :hook (org-mode . org-indent-mode) (org-mode . visual-line-mode))
 
 ;; Org-roam
 (use-package org-roam
@@ -46,7 +45,8 @@
   :bind (("C-c n l" . org-roam-buffer-toggle)
 	 ("C-c n f" . org-roam-node-find)
 	 ("C-c n i" . org-roam-node-insert)
-	 ("C-c n c" . org-roam-capture))
+	 ("C-c n c" . org-roam-capture)
+	 ("C-c n r d" . org-roam-dailies-find-date))
   :config
   (org-roam-db-autosync-mode)
 )
@@ -103,3 +103,40 @@
 (use-package qml-ts-mode
   :vc (:url "https://github.com/xhcoding/qml-ts-mode" :rev :newest)
   :mode "\\.qml\\'")
+
+;; Terminal: Vterm
+(use-package vterm
+  :ensure t)
+
+;; Evil Mode and Evil Collections
+(use-package evil
+  :init
+  (setq evil-want-integration t
+        evil-want-keybinding nil
+        evil-want-C-u-scroll t
+        evil-want-Y-yank-to-eol t
+        evil-respect-visual-line-mode t
+        evil-undo-system 'undo-redo)
+  :config
+  (evil-mode 1))
+
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :init
+  (setq evil-want-integration t evil-want-keybinding nil)
+  :config
+  (evil-collection-init))
+
+;; Vertico and Orderless Search (Fuzzy Finder)
+(use-package vertico
+  :ensure t
+  :init
+  (vertico-mode))
+
+(use-package orderless
+  :ensure t
+  :custom
+  (completion-styles '(orderless basic))
+  ;; Makes orderless treat component queries as fuzzy flex matches
+  (orderless-matching-styles '(orderless-flex))) 
