@@ -112,6 +112,11 @@
 (use-package vterm
   :ensure t)
 
+;; Project.el
+(use-package project
+  :ensure nil
+  :bind (("C-x p C" . project-recompile)))
+
 ;; ;; Evil Mode and Evil Collections
 ;; (use-package evil
 ;;   :init
