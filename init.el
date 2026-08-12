@@ -25,6 +25,12 @@
   (load-theme 'gruvbox t)
   )
 
+;; Direnv
+(use-package direnv
+  :ensure t
+  :config
+  (direnv-mode))
+
 ;; Org configuration
 (use-package org
   :ensure nil
