@@ -66,3 +66,34 @@
 
 (use-package transient :ensure t)
 (use-package magit :ensure t :after transient)
+
+;; Treesit Langs Better Syntax Highlighting
+(use-package treesit
+  :ensure nil
+  :init
+  (add-to-list 'auto-mode-alist '("CMakeLists\\.txt\\'" . cmake-mode))
+  (add-to-list 'auto-mode-alist '("\\.cmake\\'" . cmake-mode))
+  :config
+  (setq treesit-extra-load-path '("~/.config/emacs/tree-sitter"))
+  (setq treesit-language-source-alist
+	'((bash . ("https://github.com/tree-sitter/tree-sitter-bash"))
+          (c    . ("https://github.com/tree-sitter/tree-sitter-c"))
+          (cpp  . ("https://github.com/tree-sitter/tree-sitter-cpp"))
+          (cmake . ("https://github.com/uyha/tree-sitter-cmake"))
+          (nix  . ("https://github.com/nix-community/tree-sitter-nix"))
+	  (qmljs . ("https://github.com/yuja/tree-sitter-qmljs.git"))))
+  (setq major-mode-remap-alist '((sh-mode . bash-ts-mode)
+				 (c-mode . c-ts-mode)
+				 (c++-mode . c++-ts-mode)
+				 (cmake-mode . cmake-ts-mode)))
+  )
+
+;; Treesit Modes Not Built-in
+(use-package nix-ts-mode
+  :ensure t
+  :after treesit
+  :mode "\\.nix\\'")
+
+(use-package qml-ts-mode
+  :vc (:url "https://github.com/xhcoding/qml-ts-mode" :rev :newest)
+  :mode "\\.qml\\'")

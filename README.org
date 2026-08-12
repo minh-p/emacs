@@ -10,9 +10,9 @@ bad workflow like being too terminal dependent (instead of using native features
 1. [X] Theme
 2. [X] Fonts
 3. [X] Org-mode + Org-roam
-4. [ ] Treesitter
-   - [ ] C/C++
-   - [ ] Nix
-   - [ ] CMake
-   - [ ] QML
-   - [ ] Bash
+4. [X] Treesitter
+   - [X] C/C++
+   - [X] Nix
+   - [X] CMake
+   - [X] QML
+   - [X] Bash
