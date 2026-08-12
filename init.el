@@ -9,6 +9,9 @@
 (setq custom-file (locate-user-emacs-file "custom.el"))
 (load custom-file 'noerror)
 
+;; Backup-directory
+(setq backup-directory-alist '(("." . "~/.config/emacs/backups")))
+
 ;; Melpa + Additional Packages Related Settings
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
@@ -49,7 +52,7 @@
 	 ("C-c n r d" . org-roam-dailies-find-date))
   :config
   (org-roam-db-autosync-mode)
-)
+  )
 
 
 (use-package org-superstar
@@ -116,6 +119,40 @@
 (use-package project
   :ensure nil
   :bind (("C-x p C" . project-recompile)))
+
+;; Code Formatter
+(use-package apheleia
+  :ensure t
+  :init
+  (apheleia-global-mode +1)
+  )
+
+;; Indentations
+(setq-default c-basic-offset 4)
+
+;; Eglot Hooks to Formatter
+(use-package eglot
+  :after treesit
+  :preface
+  (defun my/cs-offset ()
+    (setq c-basic-offset 4))
+
+  (defun my/cs-ts-offset ()
+    (setq c-ts-mode-indent-offset 4))
+
+  :ensure nil
+
+  :hook
+  ((c-mode . my/cs-offset)
+   (c++-mode . my/cs-offset)
+   (c-ts-mode . my/cs-ts-offset)
+   (c++-ts-mode . my/cs-ts-offset))
+
+  :config
+  (add-hook 'eglot-managed-mode-hook
+            (lambda ()
+              (add-hook 'before-save-hook
+                        #'eglot-format-buffer nil t))))
 
 ;; ;; Evil Mode and Evil Collections
 ;; (use-package evil
