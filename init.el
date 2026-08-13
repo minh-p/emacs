@@ -68,6 +68,7 @@
 	 (org-mode . org-indent-mode)
 	 (org-mode . visual-line-mode))
   :config
+  (setq-default org-pretty-entities t)
   (setq org-fontify-quote-and-verse-blocks t)
   (setq org-fontify-todo-headline t)
   (setq org-fontify-done-headline t)
