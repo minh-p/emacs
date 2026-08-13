@@ -52,9 +52,37 @@
   (direnv-mode))
 
 ;; Org configuration
+(defun my/org-prettify()
+  (setq-local prettify-symbols-alist
+              '(("#+BEGIN_QUOTE" . ?“)
+                ("#+END_QUOTE"   . ?”)
+                ("#+BEGIN_SRC"   . ?λ)
+                ("#+END_SRC"     . ?∎)))
+  (prettify-symbols-mode t)
+  )
+
 (use-package org
   :ensure nil
-  :hook (org-mode . org-indent-mode) (org-mode . visual-line-mode))
+  :hook (
+	 (org-mode . my/org-prettify)
+	 (org-mode . org-indent-mode)
+	 (org-mode . visual-line-mode))
+  :config
+  (setq org-fontify-quote-and-verse-blocks t)
+  (setq org-fontify-todo-headline t)
+  (setq org-fontify-done-headline t)
+  (setq org-adapt-indentation t)
+  (set-face-attribute
+   'org-todo nil
+   :background (face-foreground 'warning nil t)
+   :foreground (face-background 'default nil t)
+   :weight 'bold)
+  (set-face-attribute
+   'org-done nil
+   :background (face-foreground 'success nil t)
+   :foreground (face-background 'default nil t)
+   :weight 'bold)
+  )
 
 ;; Org-roam
 (use-package org-roam
