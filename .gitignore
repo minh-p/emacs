@@ -13,3 +13,6 @@ transient/
 projects
 projectile-bookmarks.eld
 tree-sitter/
+eshell/
+tabsession.el
+.emacs-tabspaces-session.el

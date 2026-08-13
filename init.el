@@ -323,6 +323,48 @@
 (use-package embark-consult
   :ensure t)
 
+;; Buffer Management With Workspaces - Tabspaces
+;;; Can only be started in a project.
+;;; tabspaces needs to be manually activated
+;;; I don't want it to load on start-up
+;;; Also key map prefix is C-c TAB by default
+(use-package tabspaces
+  :ensure t
+  :after consult
+  :commands (tabspaces-switch-or-create-workspace
+	     tabspaces-open-or-create-project-and-workspace)
+  :custom
+  (tabspaces-use-filtered-buffers-as-default t)
+  (tabspaces-default-tab "main")
+  (tabspaces-remove-to-default t)
+  (tabspaces-include-buffers '("*scratch*"))
+  (tabspaces-initialize-project-with-todo t)
+  (tabspaces-todo-file-name "project-todo.org")
+  (tabspaces-session t)
+  (tabspaces-session-auto-restore t)
+  (tabspace-fully-resolve-paths t)
+  (tabspaces-exclude-buffers '("*Messages*" "*Compile-Log*"))
+  (tab-bar-new-tab-choice "*scratch*")
+  :config
+  (plist-put consult-source-buffer :hidden t)
+  (plist-put consult-source-buffer :default nil)
+  ;; set consult-workspace buffer list
+  (defvar consult--source-workspace
+    (list :name     "Workspace Buffers"
+          :narrow   ?w
+          :history  'buffer-name-history
+          :category 'buffer
+          :state    #'consult--buffer-state
+          :default  t
+          :items    (lambda () (consult--buffer-query
+				:predicate #'tabspaces--local-buffer-p
+				:sort 'visibility
+				:as #'buffer-name)))
+
+    "Set workspace buffer list for consult-buffer.")
+  (add-to-list 'consult-buffer-sources 'consult--source-workspace)
+  )
+
 ;; Completion - Corfu + Cape
 ;;; Tab for Complete at Point
 (setq tab-always-indent 'complete
