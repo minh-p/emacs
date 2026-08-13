@@ -403,3 +403,8 @@
   :hook (pdf-view-mode . (lambda() (display-line-numbers-mode -1)))
   :config
   (pdf-loader-install :no-query))
+
+;; DevDocs
+(use-package devdocs
+  :ensure t
+  :bind (("C-h D" . devdocs-lookup)))

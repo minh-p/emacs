@@ -16,3 +16,4 @@ tree-sitter/
 eshell/
 tabsession.el
 .emacs-tabspaces-session.el
+devdocs/
