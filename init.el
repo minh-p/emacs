@@ -32,9 +32,9 @@
 
 ;; Buffer Centering - Olivetti
 (use-package olivetti
-  :hook (org-mode dired-mode)
-  :config
-  (olivetti-set-width 120)
+  :hook (org-mode)
+  :custom
+  (olivetti-body-width 120)
   :ensure t)
 
 ;; Theme
@@ -396,15 +396,26 @@
   (add-hook 'completion-at-point-functions #'cape-emoji)
   )
 
+;; Enter reader mode: olivetti mode, no line number
+(defun my/reader-setup ()
+  (olivetti-mode 1)
+  (display-line-numbers-mode -1)
+  )
 ;; Multi-media
 (use-package pdf-tools
   :ensure t
   :magic ("%PDF" . pdf-view-mode)
-  :hook (pdf-view-mode . (lambda() (display-line-numbers-mode -1)))
+  :hook (pdf-view-mode . my/reader-setup)
   :config
   (pdf-loader-install :no-query))
 
 ;; DevDocs
 (use-package devdocs
   :ensure t
+  :hook (devdocs-mode . my/reader-setup)
   :bind (("C-h D" . devdocs-lookup)))
+
+;; Dired
+(use-package dired
+  :ensure nil
+  :hook (dired-mode . my/reader-setup))
