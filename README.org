@@ -19,3 +19,4 @@ bad workflow like being too terminal dependent (instead of using native features
 5. [X] Better Buffer - Vertico, Orderless, Marginalia
 6. [X] Better Searching - Consult
 7. [X] Actions Menu - Embark
+8. [X] Completion Front-End and Back-End - Corfu and Cape
