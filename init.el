@@ -73,6 +73,8 @@
   (setq org-fontify-todo-headline t)
   (setq org-fontify-done-headline t)
   (setq org-adapt-indentation t)
+  (setq org-use-sub-superscripts '{})
+  (setq org-hide-emphasis-markers t)
   (set-face-attribute
    'org-todo nil
    :background (face-foreground 'warning nil t)
