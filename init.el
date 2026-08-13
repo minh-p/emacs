@@ -395,3 +395,11 @@
   (add-hook 'completion-at-point-functions #'cape-keyword)
   (add-hook 'completion-at-point-functions #'cape-emoji)
   )
+
+;; Multi-media
+(use-package pdf-tools
+  :ensure t
+  :magic ("%PDF" . pdf-view-mode)
+  :hook (pdf-view-mode . (lambda() (display-line-numbers-mode -1)))
+  :config
+  (pdf-loader-install :no-query))
