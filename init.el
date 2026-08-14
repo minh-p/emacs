@@ -452,3 +452,5 @@
 (use-package dired
   :ensure nil
   :hook (dired-mode . my/reader-setup))
+
+(put 'upcase-region 'disabled nil)
