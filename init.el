@@ -32,7 +32,7 @@
 
 ;; Buffer Centering - Olivetti
 (use-package olivetti
-  :hook (org-mode)
+  :hook (org-mode prog-mode)
   :custom
   (olivetti-body-width 120)
   :ensure t)
