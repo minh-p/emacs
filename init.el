@@ -66,7 +66,8 @@
   :hook (
 	 (org-mode . my/org-prettify)
 	 (org-mode . org-indent-mode)
-	 (org-mode . visual-line-mode))
+	 (org-mode . visual-line-mode)
+	 (org-mode . flyspell-mode))
   :config
   (setq-default org-pretty-entities t)
   (setq org-fontify-quote-and-verse-blocks t)
@@ -428,6 +429,13 @@
   (add-hook 'completion-at-point-functions #'cape-keyword)
   (add-hook 'completion-at-point-functions #'cape-emoji)
   )
+
+;; Spell Checking Personal dictionary
+(use-package ispell
+  :ensure nil
+  :custom
+  (ispell-program-name "ispell")
+  (ispell-personal-dictionary (expand-file-name "dictionary.txt" user-emacs-directory)))
 
 ;; Enter reader mode: olivetti mode, no line number
 (defun my/reader-setup ()

@@ -17,3 +17,4 @@ eshell/
 tabsession.el
 .emacs-tabspaces-session.el
 devdocs/
+.org-id-locations

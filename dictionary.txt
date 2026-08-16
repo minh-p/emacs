@@ -1,0 +1,8 @@
+deadlift
+deadlifts
+Heapify
+ICS
+min
+percolations
+zybooks
+ZyBooks
