@@ -462,3 +462,12 @@
   :hook (dired-mode . my/reader-setup))
 
 (put 'upcase-region 'disabled nil)
+
+;; Windmove configuration
+(use-package windmove
+  :ensure nil
+  :bind*
+  (("M-<left>" . windmove-left)
+   ("M-<right>" . windmove-right)
+   ("M-<up>" . windmove-up)
+   ("M-<down>" . windmove-down)))

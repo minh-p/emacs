@@ -1,5 +1,8 @@
+CANC
 deadlift
 deadlifts
+heapification
+heapified
 Heapify
 ICS
 min
