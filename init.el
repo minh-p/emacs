@@ -89,10 +89,13 @@
   )
 
 ;; Org-roam
+(defconst my/org-roam-directory "~/org-roam")
 (use-package org-roam
   :ensure t
+  :init
+  (make-directory my/org-roam-directory t)
   :custom
-  (org-roam-directory (file-truename "~/org-roam"))
+  (org-roam-directory (file-truename my/org-roam-directory))
   (org-roam-completion-everywhere t)
   :bind (("C-c n l" . org-roam-buffer-toggle)
 	 ("C-c n f" . org-roam-node-find)
@@ -202,7 +205,8 @@
   (add-hook 'eglot-managed-mode-hook
             (lambda ()
 	      (add-hook 'before-save-hook
-                        #'eglot-format-buffer nil t))))
+                        #'eglot-format-buffer nil t)
+	      (setq eldoc-echo-area-prefer-doc-buffer t))))
 
 ;; ;; Evil Mode and Evil Collections
 ;; (use-package evil
@@ -446,9 +450,12 @@
 (use-package pdf-tools
   :ensure t
   :magic ("%PDF" . pdf-view-mode)
-  :hook (pdf-view-mode . my/reader-setup)
+  :hook ((pdf-view-mode . my/reader-setup))
   :config
-  (pdf-loader-install :no-query))
+  (pdf-loader-install :no-query)
+  :custom
+  (pdf-view-midnight-colors '("#abb2bf" . "#282c34"))
+  )
 
 ;; DevDocs
 (use-package devdocs
@@ -471,3 +478,91 @@
    ("M-<right>" . windmove-right)
    ("M-<up>" . windmove-up)
    ("M-<down>" . windmove-down)))
+
+;; Eldoc syntax highlighting
+(use-package markdown-mode
+  :ensure t
+  :config
+  (setq markdown-fontify-code-blocks-natively t))
+
+;; Auth-Source Credentials Helper
+(defun my/auth-credentials (url)
+  "Return (USER PASSWORD) for URL using `auth-source'."
+  (require 'url-parse)
+  (let* ((host (url-host (url-generic-parse-url url)))
+         (entry
+          (car
+           (auth-source-search
+            :host host
+            :require '(:user :secret)
+            :max 1))))
+
+    (unless entry
+      (user-error "No credentials found in auth-source for %s" host))
+
+    (let ((user (plist-get entry :user))
+          (secret (plist-get entry :secret)))
+      (list user
+            (if (functionp secret)
+                (funcall secret)
+              secret))))
+  )
+
+;; CalibreDB OPDS Only
+(defconst my/calibre-opds-url
+  "http://library.vhmp.dev/opds")
+
+(defconst my/books-directory
+  (expand-file-name "~/Books/"))
+
+(defconst my/calibre-root
+  (expand-file-name "~/Calibre"))
+
+(make-directory my/books-directory t)
+(make-directory my/calibre-root t)
+
+(use-package calibredb
+  :ensure t
+  :commands (calibredb)
+  :config
+  (setq calibredb-opds-download-dir my/books-directory)
+  (setq calibredb-root-dir my/calibre-opds-url)
+  (setq calibredb-db-dir (expand-file-name "metadata.db" calibredb-root-dir))
+  (pcase-let ((`(,user ,password)
+               (my/auth-credentials my/calibre-opds-url)))
+    (setq calibredb-library-alist
+          `((,my/calibre-opds-url
+             (name . "VHMP Collections")
+             (account . ,user)
+             (password . ,password))))
+    )
+  )
+
+(use-package nov
+  :ensure t
+  :mode ("\\.epub\\'" . nov-mode))
+
+(use-package djvu
+  :ensure t
+  :mode ("\\.djvu\\'" . djvu-read-mode))
+
+(use-package org-noter
+  :ensure t
+  :after (org org-roam nov pdf-tools)
+
+  :custom
+  ;; When starting org-noter from a document, also search our
+  ;; org-roam tree for notes.
+  (org-noter-notes-search-path
+   (list (file-truename my/org-roam-directory)))
+
+  ;; Remember where we stopped reading.
+  (org-noter-auto-save-last-location t)
+
+  ;; I generally prefer using the current frame.
+  (org-noter-always-create-frame nil)
+
+  :config
+  ;; Current org-noter has explicit org-roam integration.
+  (org-noter-enable-org-roam-integration)
+  )

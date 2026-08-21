@@ -1,11 +1,16 @@
 CANC
+CMakeLists
 deadlift
 deadlifts
+equivalate
+gdb
 heapification
 heapified
 Heapify
 ICS
 min
 percolations
+RSVCE
+txt
 zybooks
 ZyBooks
