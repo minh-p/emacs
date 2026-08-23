@@ -97,6 +97,7 @@
   :custom
   (org-roam-directory (file-truename my/org-roam-directory))
   (org-roam-completion-everywhere t)
+  (org-default-notes-file (concat my/org-roam-directory "/fleeting.org"))
   :bind (("C-c n l" . org-roam-buffer-toggle)
 	 ("C-c n f" . org-roam-node-find)
 	 ("C-c n i" . org-roam-node-insert)
@@ -566,3 +567,12 @@
   ;; Current org-noter has explicit org-roam integration.
   (org-noter-enable-org-roam-integration)
   )
+
+;; org-roam-ui
+(use-package org-roam-ui
+  :ensure t
+  :config
+  (setq org-roam-ui-sync-theme t
+        org-roam-ui-follow t
+        org-roam-ui-update-on-save t
+        org-roam-ui-open-on-start t))

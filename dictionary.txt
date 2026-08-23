@@ -1,4 +1,5 @@
 CANC
+catalogue
 CMakeLists
 deadlift
 deadlifts
@@ -9,9 +10,11 @@ heapified
 Heapify
 ICS
 min
+org
 percolations
 RSVCE
 Strang
 txt
+Zettelkasten
 zybooks
 ZyBooks
