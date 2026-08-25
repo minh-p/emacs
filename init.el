@@ -86,7 +86,34 @@
    :background (face-foreground 'success nil t)
    :foreground (face-background 'default nil t)
    :weight 'bold)
+
+  (add-to-list 'org-preview-latex-process-alist
+               '(lualatex
+		 :programs ("lualatex" "dvisvgm")
+		 :description "dvi > svg"
+		 :message "you need to install the programs: lualatex and dvisvgm."
+		 :image-input-type "dvi"
+		 :image-output-type "svg"
+		 :image-size-adjust (1.0 . 1.0)
+		 :latex-compiler ("lualatex --interaction=nonstopmode --output-format=dvi --output-directory=%o %f")
+		 :image-converter ("dvisvgm %f -n -b min -c %S -o %O")))
+  
+  (setf (plist-get org-format-latex-options :scale) 2.5)  
+  :custom
+  (org-refile-targets '((nil :maxlevel . 9) 
+                        (org-agenda-files :maxlevel . 9)))
+  (org-preview-latex-default-process 'lualatex)
+  (org-latex-compiler "lualatex")
   )
+
+(use-package auctex
+  :ensure t)
+
+(use-package cdlatex
+  :after auctex
+  :ensure t
+  :hook
+  (org-mode . org-cdlatex-mode))
 
 ;; Org-roam
 (defconst my/org-roam-directory "~/org-roam")
@@ -107,6 +134,16 @@
   (org-roam-db-autosync-mode)
   )
 
+(use-package org-agenda
+  :ensure nil
+  :bind (("C-c o a" . org-agenda))
+  :custom
+  (org-agenda-files (list (expand-file-name "tasks.org" my/org-roam-directory)))
+  (org-todo-keywords '((sequence "TODO(t)" "|" "DONE(d)" "CANC(c)")))
+  (org-agenda-skip-function-global
+   (lambda ()
+     (org-agenda-skip-entry-if 'todo '("CANC"))))
+  )
 
 (use-package org-superstar
   :ensure t
