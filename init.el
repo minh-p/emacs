@@ -125,6 +125,7 @@
   (org-roam-directory (file-truename my/org-roam-directory))
   (org-roam-completion-everywhere t)
   (org-default-notes-file (concat my/org-roam-directory "/fleeting.org"))
+  (org-roam-node-display-template (concat "${title:*} " (propertize "${tags:*}" 'face 'org-tag)))
   :bind (("C-c n l" . org-roam-buffer-toggle)
 	 ("C-c n f" . org-roam-node-find)
 	 ("C-c n i" . org-roam-node-insert)
@@ -613,3 +614,14 @@
         org-roam-ui-follow t
         org-roam-ui-update-on-save t
         org-roam-ui-open-on-start t))
+
+;; ox-hugo
+(use-package ox-hugo
+  :ensure t
+  :pin melpa
+  :after ox
+  )
+
+;; Mermaid-Mode
+(use-package mermaid-mode
+  :ensure t)
