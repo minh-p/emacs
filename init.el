@@ -625,3 +625,8 @@
 ;; Mermaid-Mode
 (use-package mermaid-mode
   :ensure t)
+
+
+(use-package lua-mode
+  :ensure t
+  :mode ("\\.\\(lua\\|luau\\)\\'"))
