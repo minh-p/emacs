@@ -38,12 +38,12 @@
   :ensure t)
 
 ;; Theme
-(use-package gruvbox-theme
-  :ensure t
-  :config
-  (load-theme 'gruvbox t)
-  (set-face-attribute 'line-number nil
-                      :background 'unspecified))
+;; (use-package gruvbox-theme
+;;   :ensure t
+;;   :config
+;;   (load-theme 'gruvbox t)
+;;   (set-face-attribute 'line-number nil
+;;                       :background 'unspecified))
 
 ;; Direnv
 (use-package direnv
@@ -631,3 +631,10 @@
 (use-package lua-mode
   :ensure t
   :mode ("\\.\\(lua\\|luau\\)\\'"))
+
+(use-package tokyo-night
+  :ensure t
+  :config
+  (load-theme 'tokyo-night t)
+  (set-face-attribute 'line-number nil
+                      :background 'unspecified))
