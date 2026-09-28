@@ -125,7 +125,7 @@
   (org-roam-directory (file-truename my/org-roam-directory))
   (org-roam-completion-everywhere t)
   (org-default-notes-file (concat my/org-roam-directory "/fleeting.org"))
-  (org-roam-node-display-template (concat "${title:*} " (propertize "${tags:*}" 'face 'org-tag)))
+  (org-roam-node-display-template (concat "${title:40} " (propertize "${tags:40}" 'face 'org-tag)))
   :bind (("C-c n l" . org-roam-buffer-toggle)
 	 ("C-c n f" . org-roam-node-find)
 	 ("C-c n i" . org-roam-node-insert)
