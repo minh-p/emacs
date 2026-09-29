@@ -98,7 +98,7 @@
 		 :latex-compiler ("lualatex --interaction=nonstopmode --output-format=dvi --output-directory=%o %f")
 		 :image-converter ("dvisvgm %f -n -b min -c %S -o %O")))
   
-  (setf (plist-get org-format-latex-options :scale) 2.5)  
+  (setf (plist-get org-format-latex-options :scale) (if (> (display-pixel-width) 3000) 2.5 2.5))  
   :custom
   (org-refile-targets '((nil :maxlevel . 9) 
                         (org-agenda-files :maxlevel . 9)))
@@ -106,14 +106,48 @@
   (org-latex-compiler "lualatex")
   )
 
-(use-package auctex
-  :ensure t)
-
 (use-package cdlatex
   :after auctex
   :ensure t
   :hook
   (org-mode . org-cdlatex-mode))
+
+(use-package auctex
+  :ensure t)
+
+(use-package preview-auto
+  :ensure t
+  :hook (LaTeX-mode . preview-auto-setup))
+
+;; Latex org mode rendering
+;;; Rendering backend
+(use-package latex-to-svg-backend
+  :vc (:url "https://github.com/alberti42/latex-to-svg-backend"
+	    :rev :newest))
+
+;;; Shared frontend
+(use-package latex-to-svg-frontend
+  :vc (:url "https://github.com/alberti42/latex-to-svg"
+	    :rev :newest
+	    :files ("latex-to-svg-frontend.el"))
+
+  :config
+  ;; Refresh previews when the frame font/display characteristics change.
+  (add-hook 'after-setting-font-hook
+            #'latex-to-svg-frontend-on-appearance-change)
+
+  ;; Refresh when changing themes.
+  (add-hook 'enable-theme-functions
+            #'latex-to-svg-frontend-on-appearance-change))
+
+;; Org-mode integration
+(use-package latex-to-svg-for-org
+  :vc (:url "https://github.com/alberti42/latex-to-svg"
+	    :rev :newest
+	    :files ("latex-to-svg-for-org.el"))
+
+  :hook
+  (org-mode . latex-to-svg-for-org-mode))
 
 ;; Org-roam
 (defconst my/org-roam-directory "~/org-roam")
@@ -545,7 +579,7 @@
       (list user
             (if (functionp secret)
                 (funcall secret)
-              secret))))
+	      secret))))
   )
 
 ;; CalibreDB OPDS Only
@@ -569,7 +603,7 @@
   (setq calibredb-root-dir my/calibre-opds-url)
   (setq calibredb-db-dir (expand-file-name "metadata.db" calibredb-root-dir))
   (pcase-let ((`(,user ,password)
-               (my/auth-credentials my/calibre-opds-url)))
+	       (my/auth-credentials my/calibre-opds-url)))
     (setq calibredb-library-alist
           `((,my/calibre-opds-url
              (name . "VHMP Collections")
@@ -637,7 +671,7 @@
   :config
   (load-theme 'tokyo-night t)
   (set-face-attribute 'line-number nil
-                      :background 'unspecified))
+		      :background 'unspecified))
 
 (use-package doom-themes
   :ensure t
