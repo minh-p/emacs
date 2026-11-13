@@ -25,6 +25,8 @@
 (column-number-mode 1)
 (setq display-line-numbers-type 'relative)
 (global-display-line-numbers-mode)
+(setq-default display-line-numbers-width 5)
+(setq-default display-line-numbers-width-start t)
 
 ;; Disable Wrapping
 (global-visual-line-mode -1)
@@ -104,6 +106,7 @@
                         (org-agenda-files :maxlevel . 9)))
   (org-preview-latex-default-process 'lualatex)
   (org-latex-compiler "lualatex")
+  (org-log-into-drawer t)
   )
 
 (use-package cdlatex
