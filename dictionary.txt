@@ -11,6 +11,7 @@ CMake
 CMakeLists
 Cochran
 congruences
+dacha
 deadlift
 deadlifts
 Deques
@@ -34,6 +35,7 @@ heapified
 Heapify
 Hoare
 Hooke's
+hypochondria
 ICS
 Imjin
 Intorduction
@@ -43,12 +45,14 @@ Karnaugh
 KDE
 Kruskal
 Leibniz
+lnikov
 Lomuto
 maxterm
 min
 minterm
 minterms
 moduli
+Obby
 org
 percolations
 Picard's
@@ -67,10 +71,12 @@ Strang
 Sung's
 TCS
 Thiago
+thievery
 txt
 UCI
 Walmart
 Yi
+Wayland
 Zettelkasten
 zybooks
 ZyBooks
