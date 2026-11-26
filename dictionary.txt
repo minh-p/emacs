@@ -30,6 +30,7 @@ Formational
 Fyodor
 gdb
 Goggins
+guillotine
 heapification
 heapified
 Heapify
@@ -68,6 +69,7 @@ SDL
 Sennheiser
 sprites
 Strang
+subtractors
 Sung's
 TCS
 Thiago
